@@ -7,20 +7,24 @@
           <a routerLink="/login">Have an account?</a>
         </p>
         mc-backend-errors-messages
-        <form>
+        <form [formGroup]="form"
+              (ngSubmit)="onSubmit()">
           <fieldset>
             <fieldset class="form-group">
               <input type="text"
+                     formControlName="username"
                      placeholder="Username"
                      class="form-control form-control-lg">
             </fieldset>
             <fieldset class="form-group">
               <input type="text"
+                     formControlName="email"
                      placeholder="Email"
                      class="form-control form-control-lg">
             </fieldset>
             <fieldset class="form-group">
               <input type="password"
+                     formControlName="password"
                      placeholder="Password"
                      class="form-control form-control-lg">
             </fieldset>
