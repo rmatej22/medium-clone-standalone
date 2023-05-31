@@ -2,14 +2,16 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { AppRoutes } from './app/app.routes';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { isDevMode } from '@angular/core';
+import { authFeatureKey, authReducer } from './app/auth/store/reducers';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(AppRoutes),
     provideStore(),
+    provideState(authFeatureKey, authReducer),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
