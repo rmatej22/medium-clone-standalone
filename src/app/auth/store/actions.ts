@@ -14,8 +14,3 @@ export const authActions = createActionGroup({
     'Register failure': emptyProps(),
   },
 });
-
-// export const register = createAction(
-//   '[Auth] Register',
-//   props<{ request: RegisterRequestInterface }>()
-// );
