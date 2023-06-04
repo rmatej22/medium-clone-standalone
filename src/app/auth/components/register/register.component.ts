@@ -10,6 +10,7 @@ import {
   selectValidationErrors,
 } from '../../store/reducers';
 import { CommonModule } from '@angular/common';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'mc-register',
@@ -24,8 +25,10 @@ export class RegisterComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
-  isSubmitting$ = this.store.select(selectIsSubmitting);
-  backendErrors$ = this.store.select(selectValidationErrors);
+  data$ = combineLatest({
+    isSubmitting: this.store.select(selectIsSubmitting),
+    backendErrors: this.store.select(selectValidationErrors)
+  })
 
   constructor(
     private fb: FormBuilder,
