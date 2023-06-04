@@ -7,6 +7,29 @@ import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface
 import { PersistanceService } from 'src/app/shared/services/persistance.service';
 import { Router } from '@angular/router';
 
+export const getCurrentUserEffect = createEffect(
+  (
+    actions$ = inject(Actions),
+    authService = inject(AuthService),
+    persistanceService = inject(PersistanceService)
+  ) => {
+    return actions$.pipe(
+      ofType(authActions.getCurrentUser),
+      switchMap(() => {
+        return authService.getCurrentUser().pipe(
+          map((currentUser: CurrentUserInterface) => {
+            return authActions.getCurrentUserSuccess({ currentUser });
+          }),
+          catchError(() => of(authActions.getCurrentUserFailure()))
+        );
+      })
+    );
+  },
+  {
+    functional: true,
+  }
+);
+
 export const registerEffect = createEffect(
   (
     actions$ = inject(Actions),
