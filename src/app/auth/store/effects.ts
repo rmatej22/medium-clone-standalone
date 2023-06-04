@@ -14,7 +14,13 @@ export const registerEffect = createEffect(
           map((currentUser: CurrentUserInterface) =>
             authActions.registerSuccess({ currentUser })
           ),
-          catchError(() => of(authActions.registerFailure()))
+          catchError((errorResponse) =>
+            of(
+              authActions.registerFailure({
+                errors: errorResponse.error.errors,
+              })
+            )
+          )
         );
       })
     );
