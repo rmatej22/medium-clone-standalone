@@ -5,7 +5,10 @@ import { authActions } from '../../store/actions';
 import { RegisterRequestInterface } from '../../types/registerRequest.interface';
 import { RouterLink } from '@angular/router';
 import { AuthStateInterface } from '../../types/authState.interface';
-import { selectIsSubmitting } from '../../store/reducers';
+import {
+  selectIsSubmitting,
+  selectValidationErrors,
+} from '../../store/reducers';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,6 +25,7 @@ export class RegisterComponent {
     password: ['', Validators.required],
   });
   isSubmitting$ = this.store.select(selectIsSubmitting);
+  backendErrors$ = this.store.select(selectValidationErrors);
 
   constructor(
     private fb: FormBuilder,
