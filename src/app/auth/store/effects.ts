@@ -2,18 +2,25 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '../services/auth.service';
 import { authActions } from './actions';
-import { switchMap, map, catchError, of } from 'rxjs';
+import { switchMap, map, catchError, of, tap } from 'rxjs';
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+import { PersistanceService } from 'src/app/shared/services/persistance.service';
+import { Router } from '@angular/router';
 
 export const registerEffect = createEffect(
-  (actions$ = inject(Actions), authService = inject(AuthService)) => {
+  (
+    actions$ = inject(Actions),
+    authService = inject(AuthService),
+    persistanceService = inject(PersistanceService)
+  ) => {
     return actions$.pipe(
       ofType(authActions.register),
       switchMap(({ request }) => {
         return authService.register(request).pipe(
-          map((currentUser: CurrentUserInterface) =>
-            authActions.registerSuccess({ currentUser })
-          ),
+          map((currentUser: CurrentUserInterface) => {
+            persistanceService.set('accessToken', currentUser.token);
+            return authActions.registerSuccess({ currentUser });
+          }),
           catchError((errorResponse) =>
             of(
               authActions.registerFailure({
@@ -27,5 +34,20 @@ export const registerEffect = createEffect(
   },
   {
     functional: true,
+  }
+);
+
+export const registerSuccessEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(authActions.registerSuccess),
+      tap(() => {
+        router.navigateByUrl('/');
+      })
+    );
+  },
+  {
+    functional: true,
+    dispatch: false,
   }
 );
