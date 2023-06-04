@@ -11,11 +11,17 @@ import {
 } from '../../store/reducers';
 import { CommonModule } from '@angular/common';
 import { combineLatest } from 'rxjs';
+import { BackendErrorMessagesComponent } from 'src/app/shared/components/backendErrorMessages/backend-errors-messages.component';
 
 @Component({
   selector: 'mc-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    CommonModule,
+    BackendErrorMessagesComponent,
+  ],
   templateUrl: './register.component.html',
   styles: [``],
 })
@@ -27,8 +33,8 @@ export class RegisterComponent {
   });
   data$ = combineLatest({
     isSubmitting: this.store.select(selectIsSubmitting),
-    backendErrors: this.store.select(selectValidationErrors)
-  })
+    backendErrors: this.store.select(selectValidationErrors),
+  });
 
   constructor(
     private fb: FormBuilder,

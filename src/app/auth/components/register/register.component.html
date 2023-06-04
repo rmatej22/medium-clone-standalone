@@ -7,9 +7,9 @@
           <p class="text-xs-center">
             <a routerLink="/login">Have an account?</a>
           </p>
-          <!-- <mc-backend-errors-messages *ngIf="data.backendErrors"
+          <mc-backend-errors-messages *ngIf="data.backendErrors"
                                       [backendErrors]="data.backendErrors">
-          </mc-backend-errors-messages> -->
+          </mc-backend-errors-messages>
           <form [formGroup]="form"
                 (ngSubmit)="onSubmit()">
             <fieldset>
