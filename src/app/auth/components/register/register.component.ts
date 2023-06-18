@@ -23,7 +23,6 @@ import { BackendErrorMessagesComponent } from 'src/app/shared/components/backend
     BackendErrorMessagesComponent,
   ],
   templateUrl: './register.component.html',
-  styles: [``],
 })
 export class RegisterComponent {
   form = this.fb.nonNullable.group({

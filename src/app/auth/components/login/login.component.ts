@@ -24,7 +24,6 @@ import { LoginRequestInterface } from '../../types/loginRequest.interface';
     BackendErrorMessagesComponent,
   ],
   templateUrl: './login.component.html',
-  styles: [``],
 })
 export class LoginComponent {
   form = this.fb.nonNullable.group({

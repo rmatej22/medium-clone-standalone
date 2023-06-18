@@ -7,7 +7,6 @@ import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.inter
   standalone: true,
   imports: [CommonModule],
   templateUrl: './backend-errors-messages.component.html',
-  styles: [``],
 })
 export class BackendErrorMessagesComponent implements OnInit {
   @Input() backendErrors: BackendErrorsInterface = {};

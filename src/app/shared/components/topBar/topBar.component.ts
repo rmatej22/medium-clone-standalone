@@ -11,7 +11,6 @@ import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './topBar.component.html',
-  styles: [``],
 })
 export class TopBarComponent {
   data$ = combineLatest({
