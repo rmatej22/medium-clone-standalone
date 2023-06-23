@@ -23,7 +23,7 @@
          class="preview-link">
         <h1>{{article.title}}</h1>
         <span>Read more...</span>
-        TAG LIST
+        <mc-tag-list [tags]="article.tagList"></mc-tag-list>
       </a>
     </div>
     <mc-pagination [total]="data.feed.articlesCount"
