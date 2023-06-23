@@ -8,7 +8,7 @@ import { GetPopularTagsResponse } from '../types/getPopularTagsResponse.interfac
 @Injectable({
   providedIn: 'root',
 })
-export class PopularTagService {
+export class PopularTagsService {
   constructor(private http: HttpClient) {}
 
   getPopularTags(): Observable<PopularTagType[]> {
