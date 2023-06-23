@@ -11,7 +11,9 @@
     <li class="nav-item">
       <a routerLink="/"
          class="nav-link"
-         routerLinkActive="active">
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}"
+         queryParamsHandling="merge">
         Global feed
       </a>
     </li>
