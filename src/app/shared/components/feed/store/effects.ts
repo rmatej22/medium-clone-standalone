@@ -5,7 +5,7 @@ import { FeedService } from '../services/feed.service';
 import { feedActions } from './actions';
 import { GetFeedResponseInterface } from '../types/geetFeedResponse.interface';
 
-export const getCurrentUserEffect = createEffect(
+export const getFeedEffect = createEffect(
   (actions$ = inject(Actions), feedService = inject(FeedService)) => {
     return actions$.pipe(
       ofType(feedActions.getFeed),
