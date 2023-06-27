@@ -26,6 +26,7 @@ const articleFeature = createFeature({
       ...state,
       isLoading: false,
     })),
+    // noo need to react on delete article actions because of reseting state after route changes
     on(routerNavigationAction, () => initialState)
   ),
 });

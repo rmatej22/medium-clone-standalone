@@ -1,9 +1,11 @@
 import { inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, of, map, catchError } from 'rxjs';
+import { switchMap, of, map, catchError, tap } from 'rxjs';
 import { ArticleService as SharedArticleService } from 'src/app/shared/services/article.service';
 import { articleActions } from './actions';
 import { ArticleInterface } from 'src/app/shared/types/article.interface';
+import { ArticleService } from '../services/article.service';
+import { Router } from '@angular/router';
 
 export const getArticleEffect = createEffect(
   (
@@ -24,5 +26,39 @@ export const getArticleEffect = createEffect(
   },
   {
     functional: true,
+  }
+);
+
+export const deleteArticleEffect = createEffect(
+  (actions$ = inject(Actions), articleService = inject(ArticleService)) => {
+    return actions$.pipe(
+      ofType(articleActions.deleteArticle),
+      switchMap(({ slug }) => {
+        return articleService.deleteArticle(slug).pipe(
+          map(() => {
+            return articleActions.deleteArticleSucces();
+          }),
+          catchError(() => of(articleActions.deleteArticleFailure()))
+        );
+      })
+    );
+  },
+  {
+    functional: true,
+  }
+);
+
+export const redirectAfterDeleteEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(articleActions.deleteArticleFailure),
+      tap(() => {
+        router.navigateByUrl('/');
+      })
+    );
+  },
+  {
+    functional: true,
+    dispatch: false,
   }
 );
