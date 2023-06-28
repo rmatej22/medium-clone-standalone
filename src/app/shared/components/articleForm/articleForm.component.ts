@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BackendErrorsInterface } from '../../types/backendErrors.interface';
 import { ArticleFormValuesInterface } from './types/articleFormValues.interface';
+import { CommonModule } from '@angular/common';
+import { BackendErrorMessagesComponent } from '../backendErrorMessages/backend-errors-messages.component';
 
 @Component({
   selector: 'mc-article-form',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule, BackendErrorMessagesComponent],
   templateUrl: './articleForm.component.html',
 })
 export class ArticleFormComponent implements OnInit {
