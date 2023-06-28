@@ -13,7 +13,7 @@ export class CreateArticleService {
   createArticle(
     articleRequest: ArticleRequestInterface
   ): Observable<ArticleInterface> {
-    const fullUrl = environment.apiUrl + '/articles'
+    const fullUrl =  `${environment.apiUrl}/articles`
 
     return this.http
       .post<ArticleResponseInterface>(fullUrl, articleRequest)
