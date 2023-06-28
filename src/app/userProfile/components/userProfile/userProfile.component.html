@@ -10,7 +10,10 @@
             <h4>{{ data.userProfile.username }}</h4>
             <p>{{ data.userProfile.bio }}</p>
             <div>
-              FOLLOW USER BUTTON
+              <button class="btn btn-sm btn-primary"
+                      *ngIf="!data.isCurrentUserProfile">
+                FOLLOW USER
+              </button>
               <a *ngIf="data.isCurrentUserProfile"
                  class="btn btn-sm btn-outline-secondary action-btn"
                  routerLink="/settings">Edit Profile Settings</a>
